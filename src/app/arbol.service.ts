@@ -74,7 +74,37 @@ export class ArbolService {
     return r;
   }
 
-  private encontrarValor(dato: string, n: Node | null): Node | null {
+  encontrarHijosValor(dato: string, n: Node | null): any | null {
+    this.ant = null;
+    const node = this.encontrarValor(dato, n);
+
+    if (this.ant !== null && !this.ant.sw) {
+      alert('El dato a buscar no tiene hijos.')
+      return {
+        node: null,
+        ant: null,
+        datos: ''
+      };
+    } else {
+      let datos = '';
+      let l: any = node?.liga;
+      while(l !== null) {
+        if (l.sw) {
+          datos = datos + l.ligaLista.value + ' ';
+        } else {
+          datos = datos + l.value + ' ';
+        }        
+        l = l.liga;
+      }
+      return {
+        node,
+        ant: this.ant,
+        datos
+      }
+    }
+  }
+
+  encontrarValor(dato: string, n: Node | null): Node | null {
     if (n === null) return null;
     if (n.value !== null && n.value === dato.toUpperCase()) {
       return n;
@@ -96,6 +126,26 @@ export class ArbolService {
         }
       }      
       this.ant = p;
+      p = p.liga;
+    }
+    return resp;
+  }
+
+  verHojas(r: Node | null): string  {
+    if (r === null) return '';
+    if (r.liga === null && r.ligaLista === null) return `${r.value}`;
+    return this.verHojasAction(r.liga);
+  }
+
+  private verHojasAction(n: Node | any): string {
+    let resp = '';
+    let p: Node | null = n;
+    while(p !== null) {
+      if (p.sw) {
+        resp = resp + this.verHojasAction(p.ligaLista?.liga);
+      } else {
+        resp = resp + p.value + ' ';
+      }
       p = p.liga;
     }
     return resp;

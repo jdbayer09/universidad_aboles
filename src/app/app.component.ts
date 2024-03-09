@@ -10,13 +10,31 @@ import { Node } from './node_class';
 })
 export class AppComponent {
 
-  private raiz: Node | null = null;
+  raiz: Node | null = null;
   nodes: TreeNode[] = [];
   arboString: string = '';
   hojas: number = 0;
+  hojasString: string = '';
 
-  constructor(private arbolSV: ArbolService) {
-    this.loadData();    
+  datoBuscar: Node | null = null;
+  hijosDato: string = '';
+
+  constructor(private arbolSV: ArbolService) { 
+    this.raiz = this.arbolSV.insertarRaiz(this.raiz, 'X');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'C', 'X');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'f', 'X');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'h', 'X');
+    this.raiz = this.arbolSV.insertar(this.raiz, 's', 'X');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'D', 'C');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'E', 'C');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'W', 'H');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'G', 'H');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'K', 'H');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'M', 'H');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'A', 'W');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'B', 'W');
+    this.raiz = this.arbolSV.insertar(this.raiz, 'Z', 'G');
+    this.loadData();
   }
 
 
@@ -40,9 +58,35 @@ export class AppComponent {
     this.loadData(); 
   }
 
+  buscarDato() {
+    const dato = prompt("Por favor ingrese el dato para consultar");
+    if (dato === null) {
+      alert("Debe ingresar un dato valido");
+    } else {
+      const datoBuscar = this.arbolSV.encontrarValor(dato, this.raiz);
+      if (datoBuscar === null) {
+        alert(`El valor ${dato} no se ha registrado`);
+      } else {
+        alert(`El valor ${dato} esta insertado`);
+      }
+    }
+  }
+
+  buscarHijosDato() {
+    const dato = prompt("Por favor ingrese el dato para consultar");
+    if (dato === null) {
+      alert("Debe ingresar un dato valido");
+    } else {
+      const datoBuscar = this.arbolSV.encontrarHijosValor(dato, this.raiz);
+      this.datoBuscar = datoBuscar.node;
+      this.hijosDato = datoBuscar.datos;
+    }
+  }
+
   private loadData() {
     this.nodes = this.arbolSV.mostrarArbol(this.raiz);
     this.hojas = this.arbolSV.contarHojas(this.raiz);
+    this.hojasString = this.arbolSV.verHojas(this.raiz);
     this.arboString = this.arbolSV.mostrarString(this.raiz);
   }
 }

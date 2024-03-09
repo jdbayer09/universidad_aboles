@@ -1,6 +1,6 @@
 <div style="padding: 2%;">
     <div class="grid">
-        <div class="col-6">
+        <div class="col-5">
             <p-tree [value]="nodes" class="w-full md:w-30rem" layout="horizontal" [virtualScroll]="true">
                 <ng-template let-node pTemplate="url">
                     <a [href]="node.data" target="_blank" rel="noopener noreferrer" class="text-700 hover:text-primary">{{ node.label }}</a>
@@ -10,16 +10,35 @@
                 </ng-template>
             </p-tree> 
         </div>
-        <div class="col-6">
+        <div class="col-2">
             <div class="grid">
-                <div class="col-2">
-                    <b>Hojas: </b> {{hojas}}
-                </div>
-                <div class="col-10">
-                    <b>Print Arbol:</b> {{arboString}}
-                </div>
-                <div class="col-3">
+                <div class="col-12">
                     <p-button label="Insertar" (onClick)="insertAction()"></p-button>
+                </div>
+                <div class="col-12">
+                    <p-button label="Buscar Dato" (onClick)="buscarDato()" [disabled]="raiz === null"></p-button>
+                </div>
+                <div class="col-12">
+                    <p-button label="Buscar Hijos de un Dato" (onClick)="buscarHijosDato()" [disabled]="raiz === null"></p-button>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="grid">
+                <div class="col-12">
+                    <b>Raiz:</b> {{raiz !== null ? raiz.value : ''}}
+                </div>
+                <div class="col-12">
+                    <b>Arbol:</b> {{arboString}}
+                </div>
+                <div class="col-12">
+                    <b>Catidad de Hojas: </b> {{hojas}}
+                </div>
+                <div class="col-12">
+                    <b>Hojas: </b> {{hojasString}}
+                </div>
+                <div class="col-12" *ngIf="datoBuscar && datoBuscar !== null">
+                    <b>Hijos de {{datoBuscar.value}}: </b> {{hijosDato}}
                 </div>
             </div>
         </div>
