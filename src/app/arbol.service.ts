@@ -8,7 +8,6 @@ import { TreeNode } from 'primeng/api';
 export class ArbolService {
 
   private ant: Node | any = null;
-  private raiz: Node | any = null;
 
   constructor() { }
 
