@@ -16,24 +16,8 @@ export class AppComponent {
   hojas: number = 0;
 
   constructor(private arbolSV: ArbolService) {
-
-    //this.raiz = this.arbolSV.insertarRaiz(this.raiz, 'X');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'C', 'X');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'f', 'X');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'h', 'X');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 's', 'X');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'D', 'C');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'E', 'C');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'W', 'H');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'G', 'H');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'K', 'H');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'M', 'H');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'A', 'W');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'B', 'W');
-    //this.raiz = this.arbolSV.insertar(this.raiz, 'Z', 'G');
     this.loadData();    
   }
-
 
 
   insertAction() {
