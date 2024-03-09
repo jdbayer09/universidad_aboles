@@ -18,6 +18,8 @@ export class AppComponent {
 
   datoBuscar: Node | null = null;
   hijosDato: string = '';
+  
+  raicesString: string = '';
 
   constructor(private arbolSV: ArbolService) { 
     this.raiz = this.arbolSV.insertarRaiz(this.raiz, 'X');
@@ -83,11 +85,23 @@ export class AppComponent {
     }
   }
 
+  buscarHermanosDato() {
+    const dato = prompt("Por favor ingrese el dato para consultar");
+    if (dato === null) {
+      alert("Debe ingresar un dato valido");
+    } else {
+      const datoBuscar = this.arbolSV.encontrarHijosValor(dato, this.raiz);
+      this.datoBuscar = datoBuscar.node;
+      this.hijosDato = datoBuscar.datos;
+    }
+  }
+
   private loadData() {
     this.nodes = this.arbolSV.mostrarArbol(this.raiz);
     this.hojas = this.arbolSV.contarHojas(this.raiz);
     this.hojasString = this.arbolSV.verHojas(this.raiz);
     this.arboString = this.arbolSV.mostrarString(this.raiz);
+    this.raicesString = this.arbolSV.verRaices(this.raiz);
   }
 }
 

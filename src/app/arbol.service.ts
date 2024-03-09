@@ -131,6 +131,25 @@ export class ArbolService {
     return resp;
   }
 
+  verRaices(r: Node | null): string  {
+    if (r === null) return '';
+    if (r.liga === null && r.ligaLista === null) return `${r.value}`;
+    return r.value + ' ' + this.verRaicesAction(r.liga);
+  }
+
+  private verRaicesAction(n: Node | any): string {
+    let resp = '';
+    let p: Node | null = n;
+    while(p !== null) {
+      if (p.sw) {
+        resp = resp + ' ' + p.ligaLista?.value;
+        resp = resp + this.verRaicesAction(p.ligaLista?.liga);
+      }
+      p = p.liga;
+    }
+    return resp;
+  }
+
   verHojas(r: Node | null): string  {
     if (r === null) return '';
     if (r.liga === null && r.ligaLista === null) return `${r.value}`;
